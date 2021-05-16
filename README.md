@@ -7,13 +7,14 @@
 このレポジトリを clone してからスタートしてください！  
 [デモ動画](https://www.youtube.com/watch?v=0A179vkqZcY&feature=youtu.be)を参考にデザインと機能を実装してください  
 Bootstrap でレイアウトを組んで、 CSS で色を付けていくと良いと思います  
+
 **hint**  
 bootstrap はクラス名で CSS を当てていくことができます.
 e.g.  
 mt-5 = margin-top: 5px  
 d-flex = display: flex  
 etc..  
-[ここ](https://getbootstrap.com/docs/4.1/getting-started/introduction/)の左のバーから既存の BBS にはどのような CSS が掛かっているか考えてみると良いと思います
+[ここ](https://getbootstrap.com/docs/4.3/getting-started/introduction/)の左のメニュー(Layoutなど)から既存の BBS にはどのような CSS が掛かっているか考えてみると良いと思います
 
 ### 学習項目
 

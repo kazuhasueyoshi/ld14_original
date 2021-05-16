@@ -1,4 +1,4 @@
-ActiveRecord::Base.establish_connection(ENV['DATABASE_URL']||"sqlite3:db/development.db")
+ActiveRecord::Base.establish_connection
 class Contribution < ActiveRecord::Base
 
 end
