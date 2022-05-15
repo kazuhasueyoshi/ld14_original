@@ -14,7 +14,9 @@ bootstrap はクラス名で CSS を当てていくことができます.
 mt-5 = margin-top: 5px  
 d-flex = display: flex  
 ```
-[ここ](https://getbootstrap.com/docs/4.3/getting-started/introduction/)の左のメニュー(Layoutなど)から既存の BBS にはどのような CSS が掛かっているか考えてみると良いと思います
+[ここ](https://getbootstrap.com/docs/4.3/getting-started/introduction/)の左のメニュー(Layoutなど)から既存の BBS にはどのような CSS が掛かっているか考えてみると良いと思います。
+
+**注意！ ドキュメント見るときは[バージョン4.3](https://getbootstrap.com/docs/4.3/getting-started/introduction/)を参照してください！**
 
 ### 学習項目
 
