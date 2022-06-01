@@ -16,6 +16,7 @@ end
 
 get "/" do
   @contents = Contribution.all.order("id desc")
+  @comments = Comment.all.order("id desc")
   erb :index
 end
 
@@ -62,5 +63,27 @@ post "/renew/:id" do
     name: params[:user_name],
     body: params[:body],
   })
+  redirect "/"
+end
+
+post "/comment/:id" do
+  Comment.create({
+    body: params[:body],
+    contribution_id: params[:id]
+  })
+  redirect "/"
+end
+
+post "/good-comment/:id" do
+  content = Comment.find(params[:id])
+  good = content.good
+  content.update({
+    good: good + 1,
+  })
+  redirect "/"
+end
+
+post "/delete-comment/:id" do
+  Comment.find(params[:id]).destroy
   redirect "/"
 end
