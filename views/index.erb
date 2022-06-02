@@ -76,14 +76,14 @@
               <p style="color: #f8f3ef;"><%= @comments.where(contribution_id: content.id).size %><p>
             <% end %>
             <div class="test03">
-                <a  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a  data-toggle="collapse" href="#collapseExample-<%= content.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
                     <label><i style="color: #f8f3ef;" class="fa-solid fa-comment"></i><i style="color: #f8f3ef;" class="fa-solid fa-angle-down"></i></label>
                 </a>
             </div>
             </div>
             </div>
             </div>
-            <div class="collapse" id="collapseExample">
+            <div class="collapse" id="collapseExample-<%= content.id %>">
             <div style="background:#150e0a; border:0px;">
               <div class="commentmain">
               
