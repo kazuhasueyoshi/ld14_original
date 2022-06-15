@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <form action="/newcontent" method="post" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="タイトル">
+        <input type="text" name="body" placeholder="本文">
+        <input type="file" name="file">
+        <input type="submit" value="POST">
+    </form>
+    <% @contents.each do |content| %>
+        <br><%= content.title %><br>
+        <%= content.body %><br>
+        <% unless content.img.empty? %>
+            <p><img src="<%= content.img %>"></p>
+        <% end%>
+        <form action="/newcomment/<%= content.id %>" method="post">
+            <input type="text" name="body" placeholder="本文">
+            <input type="submit" value="POST">
+        </form>
+        <% @comments.each do |comment| %>
+            <%= comment.body %><br>
+        <% end %>
+    <% end %>
+    <form action="/bord" method="get">
+            <input type="submit" value="掲示板">
+        </form>
+        <form action="/dmlist" method="get">
+            <input type="submit" value="DM">
+        </form>
+        <form action="/search" method="get">
+            <input type="submit" value="検索">
+        </form>
+        <form action="/setting" method="get">
+            <input type="submit" value="設定">
+        </form>
+</html>

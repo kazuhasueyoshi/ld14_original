@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <form action="/search" method="get">
+    <input type="text" name="keyword" placeholder="What are you looking for?">
+    <input type="submit" value="Search">
+    </form>
+    
+    <% unless @univstudents.empty? %>
+        <% @univstudents.each do |univstudent| %>
+            <p><%= univstudent.name %><p><br>
+            <p><%= univstudent.univ_name %><p><br>
+            <p><%= univstudent.undergraduate_name %><p><br>
+            <p><%= univstudent.department_name %><p><br>
+            <p><%= univstudent.circle_name %><p><br>
+            <p><%= univstudent.free_body %><p><br>
+            <form action="/chatroom/<%= univstudent.id%>" method ="get">
+                <input type="submit" value="DM">
+            </form>
+        <% end %>
+    <% else %>
+        Not Found
+    <% end %>
+    <form action="/bord" method="get">
+            <input type="submit" value="掲示板">
+        </form>
+        <form action="/dmlist" method="get">
+            <input type="submit" value="DM">
+        </form>
+        <form action="/search" method="get">
+            <input type="submit" value="検索">
+        </form>
+        <form action="/setting" method="get">
+            <input type="submit" value="設定">
+        </form>
+        
+</html>

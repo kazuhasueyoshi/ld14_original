@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <% @messages.each do |message|%>
+        <p><%= message.body %><p>
+    <% end %>
+    <form action="/newmessage/<%= @match_chatroom %>/<%= @oppo_id %>" method="post">
+        <input type="text" name="body" placeholder="メッセージを入力・・・">
+        <input type="submit" value="送信">
+    </form>
+</html>

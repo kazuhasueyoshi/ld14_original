@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<body>
+    <% if @user.distinct_user == 0 %>
+        <form action="/setting" method="post">
+            <input type="text" name="name" placeholder="名前"><br>
+            <input type="text" name="school_name" placeholder="高校の名前"><br>
+            <input type="text" name="free_body" placeholder="自由書き込み欄"><br>
+            <input type="submit" value="変更を保存">
+        </form>    
+    <% else %>
+        <p><%= @univstudent.id %></p>
+        <form action="/setting" method="post">
+            <% if @univstudent.name.nil? or @univstudent.name == "" %>
+                <p>未設定</p>
+            <% else %>
+                <p><%= @univstudent.name %></p>
+            <% end %>
+            <input type="text" name="name" placeholder="名前"><br>
+            
+            
+            <% if @univstudent.univ_name.nil? or @univstudent.univ_name == "" %>
+                <p>未設定</p>
+            <% else %>
+                <p><%= @univstudent.univ_name %></p>
+            <% end %>
+            <input type="text" name="univ_name" placeholder="大学名"><br>
+            
+            
+            <% if @univstudent.undergraduate_name.nil? or @univstudent.undergraduate_name == "" %>
+                <p>未設定</p>
+            <% else %>
+                <p><%= @univstudent.undergraduate_name %></p>
+            <% end %>
+            <input type="text" name="undergraduate_name" placeholder="学部名"><br>
+            
+            
+            <% if @univstudent.department_name.nil? or @univstudent.department_name == "" %>
+                <p>未設定</p>
+            <% else %>
+                <p><%= @univstudent.department_name %></p>
+            <% end %>
+            <input type="text" name="department_name" placeholder="学科名"></br>
+            
+            
+            <% if @univstudent.circle_name.nil? or @univstudent.circle_name == "" %>
+                <p>未設定</p>
+            <% else %>
+                <p><%= @univstudent.circle_name %></p>
+            <% end %>
+            <input type="text" name="circle_name" placeholder="サークル名"></br>
+            
+            
+            <% if @univstudent.free_body.nil? or @univstudent.free_body == "" %>
+                <p>未設定</p>
+            <% else %>
+                <p><%= @univstudent.free_body %></p>
+            <% end %>
+            <input type="text" name="free_body" placeholder="自由書き込み欄"><br>
+            <input type="submit" value="変更を保存">
+        </form>
+    <% end %>
+    
+        <form action="/bord" method="get">
+            <input type="submit" value="掲示板">
+        </form>
+        <form action="/dmlist" method="get">
+            <input type="submit" value="DM">
+        </form>
+        <form action="/search" method="get">
+            <input type="submit" value="検索">
+        </form>
+        <form action="/setting" method="get">
+            <input type="submit" value="設定">
+        </form>
+        <a href="/signout">ログアウト</a>
+        
+</body>

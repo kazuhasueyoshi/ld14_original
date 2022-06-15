@@ -1,7 +1,7 @@
 default_env: &default
   adapter: postgresql
   encoding: unicode
-  database: day4_bbs
+  database: okyan
 
 development:
   <<: *default
