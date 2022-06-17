@@ -46,7 +46,7 @@
                 <input type="submit" style="display:none;"><i class="fa-solid fa-comment fa-3x" style="margin:50px 0 0 30px;"></i>
             </label>
         </form>
-    <% else %>
+    <% elsif @student.where(user_id: content.user_id).first %>
         <div class="profile-field">
         <p>名前：<%= @student.where(user_id: content.user_id).first.name %></p>
         <p>学校名：<%= @student.where(user_id: content.user_id).first.school_name %></p>

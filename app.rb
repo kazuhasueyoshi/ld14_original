@@ -73,11 +73,17 @@ get "/chatroom/:id" do
     @messages = Message.where(chatroom_id: @match_chatroom)
   end
   @oppo_id = params[:id]
+  distuser = User.where(id: params[:id]).first.distinct_user
+  if distuser ==  0
+      @oppo_user_name = Student.where(user_id: params[:id]).first.name
+  else
+      @oppo_user_name = Univstudent.where(user_id: params[:id]).first.name
+  end
   erb :chatroom
 end
 
 get "/search" do
-  @univstudents = Univstudent.where('name like ?', "%#{params[:keyword]}%")
+  @univstudents = Univstudent.where('circle_name like ?', "%#{params[:keyword]}%")
   @user = User.find(session[:user])
   erb :search
 end
