@@ -83,22 +83,27 @@ get "/search" do
 end
 
 get "/bord" do
+  @univstudent = Univstudent.all
+  @student = Student.all
   @contents = Content.all.order("id desc")
   @comments = Comment.all.order("id desc")
   erb :bord
 end
 
 post "/signup" do
-  if params[:distinct_user] == 0
+  if params[:distinct_user] == "0"
     student = Student.create()
-    user = User.create(
+    user = User.create({
       mail: params[:mail], 
       student_id: student.id,
       univstudent_id: nil,
       password: params[:password],
       password_confirmation: params[:password_confirmation], 
       distinct_user: params[:distinct_user]
-      )
+      })
+      student.update({
+        user_id: user.id
+        })
     if user.persisted?
       session[:user] = user.id
     end
@@ -110,8 +115,11 @@ post "/signup" do
       univstudent_id: univstudent.id,
       password: params[:password],
       password_confirmation: params[:password_confirmation], 
-      distinct_user: params[:distinct_user],
+      distinct_user: params[:distinct_user]
       })
+      univstudent.update({
+        user_id: user.id
+        })
     if user.persisted?
       session[:user] = user.id
     end
@@ -130,17 +138,17 @@ end
 post "/setting" do
   @user = User.find(session[:user])
   if @user.distinct_user == 0
-    @student = student.where(id: @user.student_id).first
-    if params[:name] == ""
-      params[:name] = @student.name
+    student = Student.where(id: @user.student_id).first
+    if params[:name] == "" && !(student.name.nil?)
+      params[:name] = student.name
     end
-    if params[:school_name] == ""
-      params[:school_name] = @student.school_name
+    if params[:school_name] == "" && !(student.school_name.nil?)
+      params[:school_name] = student.school_name
     end
-    if params[:free_body] == ""
-      params[:free_body] = @student.free_body
+    if params[:free_body] == "" && !(student.free_body.nil?)
+      params[:free_body] = student.free_body
     end
-    @student.update({
+    student.update({
     name: params[:name],
     school_name: params[:school_name],
     free_body: params[:free_body],
@@ -203,7 +211,6 @@ post "/newcontent" do
     body: params[:body],
     img: img_url,
   })
-
   redirect "/bord"
 end
 
@@ -214,14 +221,4 @@ post "/newcomment/:id" do
     body: params[:body]
   })
   redirect "/bord"
-end
-
-
-post "/good/:id" do
-  content = Contribution.find(params[:id])
-  good = content.good
-  content.update({
-    good: good + 1,
-  })
-  redirect "/"
 end

@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/200c3a5221.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Damion&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+<body>
+  <div class="titlefield">
+  <img src="title.png" width="100%" height="100%">
+  </div>
+  <div class="login_input_field">
 <form action="/login" method="post">
-    <input type="text" name="mail" placeholder="Eメール"><br>
-    <input type="password" name="password" placeholder="パスワード"><br>
-    <input type="submit" value="ログイン">
+    <div class="flex-direction-column">
+      Eメール
+    <input type="text" name="mail" placeholder="example@gamil.com"><br>
+      パスワード
+    <input type="password" name="password" placeholder="パスワード" style="margin: 0 0 5px 0;">
+    <div class="login-buton">
+    <input type="submit" style="background: #00ffff; border: 1px solid black; size: 80%;"value="ログイン">
+    </div>
 </form>
 <% unless session[:user] %>
-  <a href="/signup">新規登録</a><br>
-  <h2>未ログイン</h2>
-<% else %>
-  <a href="/signout">ログアウト</a>
-  <h2><%= User.find(session[:user]).mail %>としてログイン</h2>
+  <div class="justify-content-center">
+  初めての方は：<a style="color: #ff6347;" href="/signup">新規登録</a>
+  </div>
 <% end %>
+</div>
+</div>
+</body>
+</html>

@@ -1,78 +1,124 @@
 <!DOCTYPE html>
 <html lang="ja">
+    <head>
+        <link rel="stylesheet" href="style.css">
+  </head>
 <body>
+    <div class="titlefield">
+      <img src="title.png" width="100%" height="100%">
+    </div>
     <% if @user.distinct_user == 0 %>
         <form action="/setting" method="post">
-            <input type="text" name="name" placeholder="名前"><br>
-            <input type="text" name="school_name" placeholder="高校の名前"><br>
-            <input type="text" name="free_body" placeholder="自由書き込み欄"><br>
-            <input type="submit" value="変更を保存">
+            <h2 style="margin: 0 0 0 39%;">あなたの設定</h2>
+            <div class="student-profbox">
+            <div class="make-group">
+            名前：　　　
+            <% if @student.name.nil? or @student.name == "" %>
+                <input type="text" name="name" placeholder="未設定">
+            <% else %>
+                <input type="text" name="name" value="<%= @student.name %>">
+            <% end %>
+            </div>
+            
+            <div class="make-group">
+            高校名：　　
+            <% if @student.school_name.nil? or @student.school_name == "" %>
+                <input type="text" name="school_name" placeholder="未設定">
+            <% else %>
+                <input type="text" name="school_name" value="<%= @student.school_name %>">
+            <% end %>
+            </div>
+            
+            <div class="make-group">
+            自由記入欄：
+            <% if @student.free_body.nil? or @student.free_body == "" %>
+                <textarea type="text" rows="6" style="width: 60%;" name="free_body" placeholder="未設定"></textarea>
+            <% else %>
+                <textarea type="text" rows="6" style="width: 60%;" name="free_body" value="<%= @student.free_body %>" ></textarea>
+            <% end %>
+            </div>
+            </div>
+            <input type="submit" value="変更を保存" style="background:#00bfff; margin: 10px 0 0 55.6%;">
         </form>    
     <% else %>
-        <p><%= @univstudent.id %></p>
         <form action="/setting" method="post">
+            <h2 style="margin: 0 0 0 39%;">あなたの設定</h2>
+            <div class="profbox">
+            <div class="make-group">
+            名前：　　　
             <% if @univstudent.name.nil? or @univstudent.name == "" %>
-                <p>未設定</p>
+                <input type="text" name="name" placeholder="未設定">
             <% else %>
-                <p><%= @univstudent.name %></p>
+                <input type="text" name="name" value="<%= @univstudent.name %>">
             <% end %>
-            <input type="text" name="name" placeholder="名前"><br>
+            </div>
             
-            
+            <div class="make-group">
+            大学名：　　
             <% if @univstudent.univ_name.nil? or @univstudent.univ_name == "" %>
-                <p>未設定</p>
+                <input type="text" name="univ_name" placeholder="未設定">
             <% else %>
-                <p><%= @univstudent.univ_name %></p>
+                <input type="text" name="univ_name" value="<%= @univstudent.univ_name %>">
             <% end %>
-            <input type="text" name="univ_name" placeholder="大学名"><br>
+            </div>
             
-            
+            <div class="make-group">
+            学部名：　　
             <% if @univstudent.undergraduate_name.nil? or @univstudent.undergraduate_name == "" %>
-                <p>未設定</p>
+                <input type="text" name="undergraduate_name" placeholder="未設定">
             <% else %>
-                <p><%= @univstudent.undergraduate_name %></p>
+                <input type="text" name="undergraduate_name" value="<%= @univstudent.undergraduate_name %>">
             <% end %>
-            <input type="text" name="undergraduate_name" placeholder="学部名"><br>
+            </div>
             
-            
+            <div class="make-group">
+            学科名：　　
             <% if @univstudent.department_name.nil? or @univstudent.department_name == "" %>
-                <p>未設定</p>
+                <input type="text" name="department_name" placeholder="未設定">
             <% else %>
-                <p><%= @univstudent.department_name %></p>
+                <input type="text" name="department_name" value="<%= @univstudent.department_name %>">
             <% end %>
-            <input type="text" name="department_name" placeholder="学科名"></br>
+            </div>
             
-            
+            <div class="make-group">
+            サークル名：
             <% if @univstudent.circle_name.nil? or @univstudent.circle_name == "" %>
-                <p>未設定</p>
+                <input type="text" name="circle_name" placeholder="未設定">
             <% else %>
-                <p><%= @univstudent.circle_name %></p>
+                <input type="text" name="circle_name" value="<%= @univstudent.circle_name %>">
             <% end %>
-            <input type="text" name="circle_name" placeholder="サークル名"></br>
+            </div>
             
-            
+            <div class="make-group">
+            自由記入欄：
             <% if @univstudent.free_body.nil? or @univstudent.free_body == "" %>
-                <p>未設定</p>
+                <input type="text" name="free_body" placeholder="未設定">
             <% else %>
-                <p><%= @univstudent.free_body %></p>
+                <input type="text" name="free_body" value="<%= @univstudent.free_body %>">
             <% end %>
-            <input type="text" name="free_body" placeholder="自由書き込み欄"><br>
-            <input type="submit" value="変更を保存">
+            </div>
+            </div>
+            <input type="submit" value="変更を保存" style="background:#00bfff; margin: 10px 0 0 55.6%;">
         </form>
     <% end %>
-    
+    <footer>
+        <div class="footer-design">
         <form action="/bord" method="get">
-            <input type="submit" value="掲示板">
+            <input type="submit" value="掲示板" style="font-size: 30px; padding: 14px 100px; background:#8fbc8f;">
         </form>
         <form action="/dmlist" method="get">
-            <input type="submit" value="DM">
+            <input type="submit" value="DM" style="font-size: 30px; padding: 20px 120px; background:#8fbc8f;">
         </form>
         <form action="/search" method="get">
-            <input type="submit" value="検索">
+            <input type="submit" value="検索" style="font-size: 30px; padding: 14px 120px; background:#8fbc8f;">
         </form>
         <form action="/setting" method="get">
-            <input type="submit" value="設定">
+            <input type="submit" value="設定" style="font-size: 30px; padding: 14px 120px; background:#8fbc8f;">
         </form>
-        <a href="/signout">ログアウト</a>
-        
+        <form action="/signout" method="get">
+            <input type="submit" value="ログアウト" style="font-size: 30px; padding: 14px 80px; background:#8fbc8f;">
+        </form>
+        </div>
+    </footer>
 </body>
+</html>

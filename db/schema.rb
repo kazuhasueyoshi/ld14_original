@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2022_06_06_010650) do
   end
 
   create_table "students", force: :cascade do |t|
+    t.integer "user_id"
     t.string "name"
     t.string "school_name"
     t.string "free_body"
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 2022_06_06_010650) do
   end
 
   create_table "univstudents", force: :cascade do |t|
+    t.integer "user_id"
     t.string "name"
     t.string "univ_name"
     t.string "undergraduate_name"

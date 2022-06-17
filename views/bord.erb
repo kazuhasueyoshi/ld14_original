@@ -1,35 +1,107 @@
 <!DOCTYPE html>
 <html lang="ja">
+    <head>
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/200c3a5221.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Damion&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <div class="titlefield">
+      <img src="title.png" width="100%" height="100%">
+    </div>
     <form action="/newcontent" method="post" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="タイトル">
-        <input type="text" name="body" placeholder="本文">
-        <input type="file" name="file">
-        <input type="submit" value="POST">
-    </form>
+        <div class="bord-input-field">
+        <p>今すぐ投稿しよう！</p>
+        <a><input type="text" name="title" placeholder="タイトル" style="width: 98%;"></a>
+        <a><textarea name="body" placeholder="本文" rows="6"style="width: 98%; margin:10px 0 10px 0"></textarea></a>
+        <div class="post-field">
+        <label>
+        <input type="file" name="file" style="margin:0 0 10px 0; display:none;"><i class="fa-solid fa-file-image" style="margin:0 10px 0 0;"></i></p>
+        </label>
+        <label>
+        <input type="submit" value="POST" style="display:none;"><i class="fa-solid fa-paper-plane" style="margin:0 2px 0 0;"></i>
+        </label>
+        </div>
+        </div>
+    </form><br>
+    <hr color="#a9a9a9" width="60%">
     <% @contents.each do |content| %>
-        <br><%= content.title %><br>
-        <%= content.body %><br>
+    <div class="bord-content-field">
+        <div class="profile-card">
+    <% if @univstudent.where(user_id: content.user_id).first %>
+        <div class="profile-field">
+        <p>名前：<%= @univstudent.where(user_id: content.user_id).first.name %></p>
+        <p>大学名：<%= @univstudent.where(user_id: content.user_id).first.univ_name %></p>
+        <p>サークル名：<%= @univstudent.where(user_id: content.user_id).first.circle_name %></p>
+        </div>
+        <form action="/chatroom/<%= @univstudent.where(user_id: content.user_id).first.id %>" method ="get">
+            <label style="color: #66cdaa;">
+                <input type="submit" style="display:none;"><i class="fa-solid fa-comment fa-3x" style="margin:50px 0 0 30px;"></i>
+            </label>
+        </form>
+    <% else %>
+        <div class="profile-field">
+        <p>名前：<%= @student.where(user_id: content.user_id).first.name %></p>
+        <p>学校名：<%= @student.where(user_id: content.user_id).first.school_name %></p>
+        </div>
+        <div class="dmbuton">
+        <form action="/chatroom/<%= @student.where(user_id: content.user_id).first.id %>" method ="get">
+                <label style="color: #66cdaa;">
+                <input type="submit" style="display:none;"><i class="fa-solid fa-comment fa-3x" style="margin:50px 0 0 30px;"></i>
+            </label>
+        </form>
+        </div>
+    <% end %>
+        </div>
+        <br>
+        <div class="content-field">
+            <br>
+        <div style="display: flex; width: 100%; justify-content: center; font-size: 20px;"><%= content.title %></div>
+        <hr color="#a9a9a9" width="90%">
+        <%= content.body %>
+        </div>
         <% unless content.img.empty? %>
-            <p><img src="<%= content.img %>"></p>
+            <p><img src="<%= content.img %>" width="100%"></p>
         <% end%>
+        <a  data-toggle="collapse" href="#collapseExample-<%= content.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <label><i style="color: #66cdaa;" class="fa-solid fa-comment"></i><i style="color: #66cdaa;" class="fa-solid fa-angle-down"></i></label>
+                </a>
+        <div class="collapse" id="collapseExample-<%= content.id %>">
         <form action="/newcomment/<%= content.id %>" method="post">
-            <input type="text" name="body" placeholder="本文">
+            <input type="text" name="body" placeholder="コメントを投稿！">
             <input type="submit" value="POST">
         </form>
         <% @comments.each do |comment| %>
             <%= comment.body %><br>
         <% end %>
+        </div>
+    </div>
     <% end %>
-    <form action="/bord" method="get">
-            <input type="submit" value="掲示板">
+     <footer>
+        <div class="footer-design">
+        <form action="/bord" method="get">
+            <input type="submit" value="掲示板" style="font-size: 30px; padding: 14px 100px; background:#8fbc8f;">
         </form>
         <form action="/dmlist" method="get">
-            <input type="submit" value="DM">
+            <input type="submit" value="DM" style="font-size: 30px; padding: 20px 120px; background:#8fbc8f;">
         </form>
         <form action="/search" method="get">
-            <input type="submit" value="検索">
+            <input type="submit" value="検索" style="font-size: 30px; padding: 14px 120px; background:#8fbc8f;">
         </form>
         <form action="/setting" method="get">
-            <input type="submit" value="設定">
+            <input type="submit" value="設定" style="font-size: 30px; padding: 14px 120px; background:#8fbc8f;">
         </form>
+        <form action="/signout" method="get">
+            <input type="submit" value="ログアウト" style="font-size: 30px; padding: 14px 80px; background:#8fbc8f;">
+        </form>
+        </div>
+    </footer>
+    </body>
 </html>

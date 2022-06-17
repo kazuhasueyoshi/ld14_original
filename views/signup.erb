@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+  <body>
+  <div class="titlefield">
+  <img src="title.png" width="100%" height="100%">
+  </div>
+  <div class="login_input_field">
 <form action="/signup" method="post">
-    <input type="text" name="mail" placeholder="Eメール"><br>
-    <input type="password" name="password" placeholder="パスワード"><br>
-    <input type="password" name="password_confirmation" placeholder="パスワードの確認"><br>
+    <div class="flex-direction-column">
+    <input type="text" name="mail" placeholder="Eメール">
+    <input type="password" name="password" placeholder="パスワード" style="margin: 10px 0 0 0;">
+    <input type="password" name="password_confirmation" placeholder="パスワードの確認" style="margin: 10px 0 10px 0;">
+    <div class="justify-content-flex-start">
     <input type="radio" name="distinct_user" value= 0> 高校生
-    <input type="radio" name="distinct_user" value= 1> 大学生</br>
-    <input type="submit" value="新規登録">
+    <input type="radio" name="distinct_user" value= 1> 大学生
+    </div>
+    <div class="login-buton">
+    <input type="submit" value="新規登録" style="color: #ff6347;">
+    </div>
 </form>
+</div>
+</div>
+</body>
+</html>
