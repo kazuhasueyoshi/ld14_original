@@ -17,23 +17,14 @@
         <img src="../title.png" width="100%" height="100%">
     </div>
     <h3>★<%= @oppo_user_name %>とのDM★</h3>
-    <%= @match_chatroom %>
-    <%= @oppo_id %>
-    <%= @my_id %>
     <div class="message_field">
     <% @messages.each do |message|%>
         
         <% if message.user_id == @oppo_id.to_i %>
-        <%= message.user_id %>
-        <%= @oppo_id.to_i %>
-        <%= message.chatroom_id %>
         <div class="oppo_message_field">
         <p style="color:#8b0000;"><%= message.body %><p>
             </div>
         <% else %>
-        <%= message.user_id %>
-        <%= @oppo_id.to_i %>
-        <%= message.chatroom_id %>
         <div class="my_message_field">
         <p style= "color:#00008b;"><%= message.body %><p>
             </div>

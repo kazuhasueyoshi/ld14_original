@@ -16,5 +16,52 @@
     <div class="titlefield">
       <img src="title.png" width="100%" height="100%">
     </div>
+    <% @oppo_ids.each do |oppo_id| %>
+        <div style="display:flex; flex-direction: row;">
+        <% if @univstudents.where(user_id: oppo_id).first %>
+        <div class="profile-field">
+        <p>名前：<%= @univstudents.where(user_id: oppo_id).first.name %></p>
+        <p>大学名：<%= @univstudents.where(user_id: oppo_id).first.univ_name %></p>
+        <p>サークル名：<%= @univstudents.where(user_id: oppo_id).first.circle_name %></p>
+        </div>
+        <form action="/chatroom/<%= @univstudents.where(user_id: oppo_id).first.user_id %>" method ="get">
+            <label style="color: #66cdaa;">
+                <input type="submit" style="display:none;"><i class="fa-solid fa-comment fa-3x" style="margin:50px 0 0 30px;"></i>
+            </label>
+        </form>
+        <% elsif @students.where(user_id: oppo_id).first %>
+        <div class="profile-field">
+        <p>名前：<%= @students.where(user_id: oppo_id).first.name %></p>
+        <p>学校名：<%= @students.where(user_id: oppo_id).first.school_name %></p>
+        </div>
+        <div class="dmbuton">
+        <form action="/chatroom/<%= @students.where(user_id: oppo_id).first.user_id %>" method ="get">
+                <label style="color: #66cdaa;">
+                <input type="submit" style="display:none;"><i class="fa-solid fa-comment fa-3x" style="margin:50px 0 0 30px;"></i>
+            </label>
+        </form>
+        </div>
+        <% end %>
+        </div>
+    <% end %>
+    <footer>
+        <div class="footer-design">
+        <form action="/bord" method="get">
+            <input type="submit" value="掲示板" style="font-size: 30px; padding: 14px 100px; background:#8fbc8f;">
+        </form>
+        <form action="/dmlist" method="get">
+            <input type="submit" value="DM" style="font-size: 30px; padding: 20px 120px; background:#8fbc8f;">
+        </form>
+        <form action="/search" method="get">
+            <input type="submit" value="検索" style="font-size: 30px; padding: 14px 120px; background:#8fbc8f;">
+        </form>
+        <form action="/setting" method="get">
+            <input type="submit" value="設定" style="font-size: 30px; padding: 14px 120px; background:#8fbc8f;">
+        </form>
+        <form action="/signout" method="get">
+            <input type="submit" value="ログアウト" style="font-size: 30px; padding: 14px 80px; background:#8fbc8f;">
+        </form>
+        </div>
+    </footer>
 </body>
 </html>

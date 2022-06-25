@@ -45,6 +45,14 @@ get "/setting" do
 end
 
 get "/dmlist" do
+  @oppo_ids = []
+  chatroom_ids = Participant.where(user_id: session[:user]).pluck(:chatroom_id)
+  chatroom_ids.each do |chatroom_id|
+    a = Participant.where(chatroom_id: chatroom_id).pluck(:user_id).reject!{|e| e  == session[:user]}
+    @oppo_ids.push(a)
+  end
+  @students = Student.all
+  @univstudents = Univstudent.all
   erb :dmlist
 end
 

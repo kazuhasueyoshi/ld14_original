@@ -41,7 +41,7 @@
         <p>大学名：<%= @univstudent.where(user_id: content.user_id).first.univ_name %></p>
         <p>サークル名：<%= @univstudent.where(user_id: content.user_id).first.circle_name %></p>
         </div>
-        <form action="/chatroom/<%= @univstudent.where(user_id: content.user_id).first.id %>" method ="get">
+        <form action="/chatroom/<%= @univstudent.where(user_id: content.user_id).first.user_id %>" method ="get">
             <label style="color: #66cdaa;">
                 <input type="submit" style="display:none;"><i class="fa-solid fa-comment fa-3x" style="margin:50px 0 0 30px;"></i>
             </label>
@@ -52,7 +52,7 @@
         <p>学校名：<%= @student.where(user_id: content.user_id).first.school_name %></p>
         </div>
         <div class="dmbuton">
-        <form action="/chatroom/<%= @student.where(user_id: content.user_id).first.id %>" method ="get">
+        <form action="/chatroom/<%= @student.where(user_id: content.user_id).first.user_id %>" method ="get">
                 <label style="color: #66cdaa;">
                 <input type="submit" style="display:none;"><i class="fa-solid fa-comment fa-3x" style="margin:50px 0 0 30px;"></i>
             </label>
