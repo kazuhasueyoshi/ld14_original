@@ -110,6 +110,9 @@ get "/bord" do
 end
 
 post "/signup" do
+  if params[:password] != params[:password_confirmation]
+    redirect "signup"
+  end
   if params[:distinct_user] == "0"
     chatroom = Chatroom.create() #自分用のチャットルームを作成
     student = Student.create()
