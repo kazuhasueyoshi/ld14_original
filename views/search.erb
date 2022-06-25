@@ -27,7 +27,7 @@
         <p>学科名：<%= univstudent.department_name %></p>
         <p>自由欄：<%= univstudent.free_body %></p>
         </div>
-        <form action="/chatroom/<%= univstudent.id %>" method ="get">
+        <form action="/chatroom/<%= univstudent.user_id %>" method ="get">
             <label style="color: #66cdaa;">
                 <input type="submit" style="display:none;"><i class="fa-solid fa-comment fa-3x" style="margin:50px 0 0 30px;"></i>
             </label>

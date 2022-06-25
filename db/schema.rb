@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2022_06_06_010650) do
     t.integer "distinct_user"
     t.string "mail"
     t.string "password_digest"
+    t.integer "my_chatroom"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

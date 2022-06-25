@@ -10,11 +10,11 @@
   <div class="login_input_field">
 <form action="/signup" method="post">
     <div class="flex-direction-column">
-    <input type="text" name="mail" placeholder="Eメール">
-    <input type="password" name="password" placeholder="パスワード" style="margin: 10px 0 0 0;">
-    <input type="password" name="password_confirmation" placeholder="パスワードの確認" style="margin: 10px 0 10px 0;">
+    <input type="text" name="mail" placeholder="Eメール" required>
+    <input type="password" name="password" placeholder="パスワード" style="margin: 10px 0 0 0;" required>
+    <input type="password" name="password_confirmation" placeholder="パスワードの確認" style="margin: 10px 0 10px 0;" required>
     <div class="justify-content-flex-start">
-    <input type="radio" name="distinct_user" value= 0> 高校生
+    <input type="radio" name="distinct_user" value= 0 checked> 高校生
     <input type="radio" name="distinct_user" value= 1> 大学生
     </div>
     <div class="login-buton">

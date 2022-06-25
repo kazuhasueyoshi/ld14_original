@@ -6,6 +6,7 @@ class CreateUser < ActiveRecord::Migration[6.1]
       t.integer :distinct_user
       t.string  :mail
       t.string  :password_digest
+      t.integer :my_chatroom
       t.timestamps null: false
     end
   end

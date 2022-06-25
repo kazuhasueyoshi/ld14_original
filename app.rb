@@ -49,15 +49,20 @@ get "/dmlist" do
 end
 
 get "/chatroom/:id" do
+  @match_chatroom = nil
   my_user = Participant.where(user_id: session[:user]).pluck(:chatroom_id)
   oppo_user = Participant.where(user_id: params[:id]).pluck(:chatroom_id)
-  unless my_user.empty? && oppo_user.empty?
+  if session[:user] == params[:id].to_i#自分の時
+    @match_chatroom = User.find(session[:user]).my_chatroom
+    @messages = Message.where(chatroom_id: @match_chatroom)
+  
+  
+  elsif !((my_user & oppo_user).empty?) #持っているチャットルームに重複があれば重複したチャットルームを代入
     @match_chatroom = my_user & oppo_user
     @match_chatroom = @match_chatroom[0]
-  else
-    @match_chatroom = nil
-  end
-  if @match_chatroom == nil
+    @messages = Message.where(chatroom_id: @match_chatroom)
+  else#もっていなければ
+    
     chatroom = Chatroom.create()
     @match_chatroom = chatroom.id
     Participant.create({
@@ -69,10 +74,10 @@ get "/chatroom/:id" do
       user_id: session[:user]
       })
     @messages = Message.where(chatroom_id: chatroom.id)
-  else
-    @messages = Message.where(chatroom_id: @match_chatroom)
   end
+  
   @oppo_id = params[:id]
+  @my_id = session[:user]
   distuser = User.where(id: params[:id]).first.distinct_user
   if distuser ==  0
       @oppo_user_name = Student.where(user_id: params[:id]).first.name
@@ -98,6 +103,7 @@ end
 
 post "/signup" do
   if params[:distinct_user] == "0"
+    chatroom = Chatroom.create() #自分用のチャットルームを作成
     student = Student.create()
     user = User.create({
       mail: params[:mail], 
@@ -105,7 +111,8 @@ post "/signup" do
       univstudent_id: nil,
       password: params[:password],
       password_confirmation: params[:password_confirmation], 
-      distinct_user: params[:distinct_user]
+      distinct_user: params[:distinct_user],
+      my_chatroom: chatroom.id
       })
       student.update({
         user_id: user.id
@@ -114,6 +121,7 @@ post "/signup" do
       session[:user] = user.id
     end
   else
+    chatroom = Chatroom.create() #自分用のチャットルームを作成
     univstudent = Univstudent.create()
     user = User.create({
       mail: params[:mail], 
@@ -121,8 +129,9 @@ post "/signup" do
       univstudent_id: univstudent.id,
       password: params[:password],
       password_confirmation: params[:password_confirmation], 
-      distinct_user: params[:distinct_user]
-      })
+      distinct_user: params[:distinct_user],
+      my_chatroom: chatroom.id
+    })
       univstudent.update({
         user_id: user.id
         })
@@ -137,6 +146,8 @@ post "/login" do
   user = User.find_by(mail: params[:mail])
   if user && user.authenticate(params[:password])
     session[:user] = user.id
+  else
+    redirect '/login'
   end
   redirect '/bord'
 end
