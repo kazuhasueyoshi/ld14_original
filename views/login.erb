@@ -32,6 +32,26 @@
   <div class="justify-content-center">
   初めての方は：<a style="color: #ff6347;" href="/signup">新規登録</a>
   </div>
+<% else %>
+<footer>
+        <div class="footer-design">
+        <form action="/bord" method="get">
+            <input type="submit" value="掲示板" style="font-size: 30px; padding: 14px 100px; background:#8fbc8f;">
+        </form>
+        <form action="/dmlist" method="get">
+            <input type="submit" value="DM" style="font-size: 30px; padding: 20px 120px; background:#8fbc8f;">
+        </form>
+        <form action="/search" method="get">
+            <input type="submit" value="検索" style="font-size: 30px; padding: 14px 120px; background:#8fbc8f;">
+        </form>
+        <form action="/setting" method="get">
+            <input type="submit" value="設定" style="font-size: 30px; padding: 14px 120px; background:#8fbc8f;">
+        </form>
+        <form action="/signout" method="get">
+            <input type="submit" value="ログアウト" style="font-size: 30px; padding: 14px 80px; background:#8fbc8f;">
+        </form>
+        </div>
+    </footer>
 <% end %>
 </div>
 </div>

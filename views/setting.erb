@@ -32,9 +32,9 @@
             <div class="make-group">
             自由記入欄：
             <% if @student.free_body.nil? or @student.free_body == "" %>
-                <textarea type="text" rows="6" style="width: 60%;" name="free_body" placeholder="未設定"></textarea>
+                <input type="text" name="free_body" placeholder="未設定">
             <% else %>
-                <textarea type="text" rows="6" style="width: 60%;" name="free_body" value="<%= @student.free_body %>" ></textarea>
+                <input type="text" name="free_body" value="<%= @student.free_body %>">
             <% end %>
             </div>
             </div>
